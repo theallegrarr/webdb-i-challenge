@@ -15,6 +15,14 @@ server.get('/api/accounts', async (req, res) => {
     }
 })
 
+server.post('/api/accounts', async (req, res) => {
+    try {
+        const result = await db('accounts').insert({ name: req.body.name, budget: req.body.budget });
 
+        res.status(200).json(result);
+    } catch(err) {
+        res.status(500).json({ message: `error fetching accounts`});
+    }
+})
 
 module.exports = server;
