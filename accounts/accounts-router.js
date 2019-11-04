@@ -44,4 +44,14 @@ router.post('/', async (req, res) => {
   }
 })
 
+router.delete('/:id', async (req, res) => {
+  try {
+      const result = await db('accounts').where({ id: req.params.id }).delete();
+
+      res.status(200).json({message: `account ${result} deleted successfully`});
+  } catch(err) {
+      res.status(400).json({ message: `error updating accounts`});
+  }
+})
+
 module.exports = router;
